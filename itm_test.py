@@ -5,15 +5,15 @@ import re
 
 def calculate(operator: str, a: int, b: int) -> int:
     actions = {
-        '+': a + b,
-        '-': a - b,
-        '/': a // b,
-        '*': a * b,
+        '+': int.__add__,
+        '-': int.__sub__,
+        '/': lambda x,y: int.__divmod__(x, y)[0],
+        '*': int.__mul__,
     }
-    return actions[operator]
+    return actions[operator](a, b)
 
 
-def get_number(num_str: str, lo=1, hi=10):
+def get_number(num_str: str, lo=1, hi=10) -> int:
     try:
         num = int(num_str)
     except ValueError:
@@ -52,6 +52,6 @@ def main(expression: str) -> str:
 
 if __name__ == '__main__':
     input_str: str = input("Введите выражение: ")
-    result = main(input_str)
+    result: str = main(input_str)
 
     print(f"Результат: {result}")
